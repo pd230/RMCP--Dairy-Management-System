@@ -1,0 +1,28 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>Vender Login Form</title>
+</head>
+<body>
+    <form action="venderlogin" method="POST" id="venderForm">
+        {%csrf_token%}
+        <label>Enter Username : </label>
+        <input type="text" name="username" id="username"><br>
+        <label>Enter password : </label>
+        <input type="password" name="password" id="password"><br>
+        <input type="submit" name="submit" value="submit">
+    </form>
+    <div>
+        {% for messages  in messages  %}
+        <h3>{{messages}}</h3>
+        {% endfor %}
+    </div>
+</body>
+</html>
