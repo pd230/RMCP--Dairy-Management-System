@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>milk_collection_list</title>
+</head>
+<body>
+    <table>
+        <tr>
+           <th>username</th>
+           <th>grade</th>
+           <th>Quantity(Liters)</th>
+           <th>Total Amount</th>
+           <th>collection date</th>
+        </tr>
+        {% for i in collections %}
+        <tr>
+            <td>{{i.user.username}}</td>
+            <td>{{i.grade.grade}}</td>
+            <td>{{i.liters_collected}}</td>
+            <td>{{i.total_amount}}</td>
+            <td>{{i.collection_date}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

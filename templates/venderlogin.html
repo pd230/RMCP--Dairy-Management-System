@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Vendor Login Form</title>
+</head>
+<body class="bg-gray-100 h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow-lg w-full max-w-md">
+        <form action="venderlogin" method="POST" class="space-y-6">
+            {% csrf_token %}
+            <!-- Username Field -->
+            <div>
+                <label for="username" class="block text-lg font-medium text-gray-700">Enter Username:</label>
+                <input 
+                    type="text" 
+                    name="username" 
+                    id="username" 
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Username"
+                >
+            </div>
+            <!-- Password Field -->
+            <div>
+                <label for="password" class="block text-lg font-medium text-gray-700">Enter Password:</label>
+                <input 
+                    type="password" 
+                    name="password" 
+                    id="password" 
+                    class="mt-1 block w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Password"
+                >
+            </div>
+            <!-- Submit Button -->
+            <div>
+                <input 
+                    type="submit" 
+                    name="submit" 
+                    value="Submit" 
+                    class="w-full bg-blue-500 text-white py-2 px-4 rounded cursor-pointer hover:bg-blue-600"
+                >
+            </div>
+        </form>
+        <!-- Error Messages -->
+        <div class="mt-4">
+            {% for message in messages %}
+            <p class="text-red-500 text-sm font-semibold">{{ message }}</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+{% load static%}
+<!-- {% static "img" as baseUrl %} -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- demo of using another file in this file -->
+
+
+
+    <!-- {% block content %} -->
+    <!-- <h1>heloooooo {{name}}</h1> -->
+
+
+
+    <form action="add" method="post">
+        <!-- {% csrf_token %} -->
+        <!-- Enter 1st number : <input type="number" name="num1"><br>
+    Enter 2nd number : <input type="number" name="num2"><br> -->
+        <!-- {{desc1.name}} -->
+        <!-- {{desc2.name}} -->
+
+        <!-- <input type="submit"> -->
+        <!-- {% csrf_token %} -->
+        {% for i in desc %}
+        {{i.name}}
+        <!-- <img src= "{{baseUrl}}/{{i.img}}"> -->
+        <img src="{% static 'img/' %}{{ i.img }}" alt="{{ i.name }}">
+        {%if i.offer %}
+        special offer
+        {% endif %}
+
+        {% endfor %}
+    </form>
+
+
+    <!-- {% endblock %} -->
+</body>
+
+</html>

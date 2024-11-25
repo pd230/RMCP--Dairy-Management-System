@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="registration" method="POST">
+
+        {%csrf_token%}
+
+        <label for="fname">Enter fname:</label>
+        <input type="text" id="fname" name="first_name"><br>
+
+        <label for="Lname">Enter last name:</label>
+        <input type="text" id="Uname" name="last_name"><br>
+
+        <label for="Uname">Enter Username:</label>
+        <input type="text" id="Uname" name="username"><br>
+    
+        <label for="Email">Enter Email:</label>
+        <input type="Email" name="email" id="Email"></textarea><br>
+
+        <label for="password1">Enter password:</label>
+        <input type="password" id="password1" name="password1"><br>
+
+        <label for="password2">Enter Confpassword:</label>
+        <input type="password" id="password2" name="password2"><br>
+    
+        <input type="submit" name="submit" value="Submit">
+        <input type="reset" name="reset" value="Reset">
+    </form>
+    <div>
+        {% for messages  in messages  %}
+        <h3>{{messages }}</h3>
+        {% endfor %}
+    </div>
+</body>
+</html>
