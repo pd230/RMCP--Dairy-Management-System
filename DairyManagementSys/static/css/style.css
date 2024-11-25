@@ -501,3 +501,23 @@
     letter-spacing: 1px;
     box-shadow: none;
 }
+
+.chart_items{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.chart_items_head{
+    background-color: rgb(113, 122, 124);
+}
+
+/* .chart_items {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(192, 224, 232);
+} */

@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User , auth
-from .models import milk_vendors
-from django.shortcuts import render
+from .models import milk_pricing, milk_vendors
 from .form import FarmerRegistrationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -48,7 +48,7 @@ def register_milk_vendors(request):
             phone_no = form.cleaned_data['phone_no']
             address = form.cleaned_data['address']
             milk_vendors.objects.create(user=user, phone_no=phone_no, address=address)
-            return redirect('login')  # Redirect to the login page
+            return redirect('venderlogin')  # Redirect to the login page
     else:
         form = FarmerRegistrationForm()
     return render(request, 'register_milk_vendors.html', {'form': form})
@@ -71,7 +71,51 @@ def venderlogin(request):
             
     else:
         return render(request, 'venderlogin.html')
+    
 
+@login_required
+def user_profile(request):
+    # Get the logged-in user
+    current_user = request.user
+
+    # Fetch milk_vendor details for the user
+    try:
+        vendor_details = milk_vendors.objects.get(user=current_user)
+        vendor = milk_vendors.objects.all()
+        print(vendor)
+    except milk_vendors.DoesNotExist:
+        vendor_details = None
+           
+
+    context = {
+        "user" : request.user,
+        "vendor_details": vendor_details
+    }
+    return render(request, 'userDashBoard.html', context)
+
+def adminlogin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        
+        user = auth.authenticate(username=username, password=password)
+        
+        if user is not None:
+            if user.is_superuser:
+                auth.login(request, user)
+                messages.success(request,"successfully login")
+                return redirect("adminDashboard")
+            else:
+                messages.error(request,"Not aunthenticated Admin")
+        else:
+            messages.error(request,"admin not found")
+            return redirect("adminlogin")
+        
+    else:
+        return render(request, "adminlogin.html")
+    
+    
+    
 
 def userDashBoard(request):
     return render(request, 'userDashBoard.html')
@@ -79,3 +123,16 @@ def userDashBoard(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+def adminDashboard(request):
+    return render(request, "adminDashboard.html")
+
+def PriceChart(request):
+    pricing_data = milk_pricing.objects.all()
+    return render(request, "PriceChart.html", {'pricing_data': pricing_data})
+    
+# def MilkCollection(request):
+#     return render(request, "MilkCollection.html")
+
+
