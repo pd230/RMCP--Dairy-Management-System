@@ -8,7 +8,7 @@
 </head>
 <body class="bg-gray-100 h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded shadow-lg w-full max-w-md">
-        <form action="venderlogin" method="POST" class="space-y-6">
+        <form action="{% url 'venderlogin' %}" method="POST" class="space-y-6">
             {% csrf_token %}
             <!-- Username Field -->
             <div>

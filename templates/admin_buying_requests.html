@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buying Requests</title>
+</head>
+<body>
+    <h1>Buying Requests</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Buyer Name</th>
+                <th>Quantity (Liters)</th>
+                <th>Request Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.buyer.name }}</td>
+                    <td>{{ order.quantity }}</td>
+                    <td>{{ order.request_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'adminDashboard' %}">Back to Dashboard</a>
+</body>
+</html>

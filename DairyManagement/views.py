@@ -3,6 +3,8 @@ from django.shortcuts import render
 from django.shortcuts import render, redirect
 from .models import MilkCollection, milk_pricing
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 
 
@@ -56,3 +58,4 @@ def registration(request):
 def about(request):
     return render(request, "about.html")
 
+        

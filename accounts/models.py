@@ -49,5 +49,43 @@ class milk_pricing(models.Model):
     
     
     
+# class milk_Buyers(models.Model):
+#     name = models.CharField(max_length=50)
+#     username = models.CharField(max_length=50)
+#     password = models.CharField(max_length=4)
+#     companyname = models.CharField(max_length=50)
+#     prn = models.IntegerField()
+#     address = models.CharField(max_length=50)
+    
+#     def __str__(self) :
+#         return f"{self.name}-{self.companyname}-{self.prn}-{self.address}-{self.username}-{self.password}"
+    
+#     class Meta:
+#         verbose_name = "milk_Buyers"
+#         verbose_name_plural = "milk_Buyers"
+        
+        
+        
+
+class MilkBuyer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    username = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=100)
+    companyname = models.CharField(max_length=100)
+    prn = models.CharField(max_length=20, unique=True)
+    address = models.TextField()
+
+    def __str__(self):
+        return f"{self.name} - {self.companyname}"
     
     
+    
+# model for milk order
+
+class MilkOrder(models.Model):
+    buyer = models.ForeignKey('MilkBuyer', on_delete=models.CASCADE)  # Relation with MilkBuyer
+    quantity = models.PositiveIntegerField()  # Quantity of milk requested
+    request_date = models.DateTimeField(auto_now_add=True)  # Timestamp for the order
+
+    def __str__(self):
+        return f"{self.buyer.name} - {self.quantity} Liters"

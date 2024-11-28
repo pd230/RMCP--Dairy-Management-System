@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Purchaser Registration Form</title>
+    <title>Register Milk Buyer</title>
 </head>
 <body>
-    
+    <h1>Register Milk Buyer</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label>Name:</label>
+        <input type="text" name="name" placeholder="Your Name" required><br>
+
+        <label>Username:</label>
+        <input type="text" name="username" placeholder="Username" required><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="Password" required><br>
+
+        <label>Company Name:</label>
+        <input type="text" name="companyname" placeholder="Company Name" required><br>
+
+        <label>PRN:</label>
+        <input type="text" name="prn" placeholder="PRN" required><br>
+
+        <label>Address:</label>
+        <textarea name="address" placeholder="Address" required></textarea><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>

@@ -22,4 +22,6 @@ class MilkCollection(models.Model):
     class Meta:
         verbose_name = "Milk Collection"
         verbose_name_plural = "Milk Collections"
+        
+        
     
