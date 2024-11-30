@@ -6,28 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <!-- Template Stylesheet -->
-    <link href="{% static 'css/style.css'%}" rel="stylesheet">
+    <link href="{% static 'css/table.css'%}" rel="stylesheet">
 
     <title>PriceChart</title>
 </head>
-<body style="height: 100%; width: 100;margin: 0; padding: 0;">
-   <div style="height: 100vh; width: 100vw; display: flex; 
-   flex-direction: col; justify-content: center;align-items: center; ">
-    <table style="height: 50vh; width: 30vw; font-size:larger; ">
-        <tr style="background-color: rgb(113, 122, 124);">
-            <th class="chart_items">Quality</th>
-            <th class="chart_items">Grade</th>
-            <th class="chart_items">price_per_liter</th>
+<body>
+   <div >
+    <h1>Milk Price Chart</h1>
+    <table>
+        <tr>
+            <th >Quality</th>
+            <th >Grade</th>
+            <th>price_per_liter</th>
         </tr>
         
             {% for i in  pricing_data%}
-        <tr style="background-color: rgb(185, 202, 206);">
-            <td class="chart_items">{{i.quality}}</td>
-            <td class="chart_items">{{i.grade}}</td>
-            <td class="chart_items"> {{i.price_per_liter}}</td>
+        <tr>
+            <td >{{i.quality}}</td>
+            <td>{{i.grade}}</td>
+            <td> {{i.price_per_liter}}</td>
         </tr>
            {% endfor %}
     </table>
+    <a href="{% url 'adminDashboard' %}">Back to Dashboard</a>
+
 </div>
 </body>
 </html>

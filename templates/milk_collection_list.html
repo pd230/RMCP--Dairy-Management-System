@@ -1,11 +1,16 @@
+{% load static%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>milk_collection_list</title>
+    <link href="{% static 'css/table.css'%}" rel="stylesheet">
+
 </head>
 <body>
+    <h1>Milk Collections Record</h1>
     <table>
         <tr>
            <th>username</th>
@@ -24,5 +29,7 @@
         </tr>
         {% endfor %}
     </table>
+    <a href="{% url 'adminDashboard' %}">Back to Dashboard</a>
+
 </body>
 </html>

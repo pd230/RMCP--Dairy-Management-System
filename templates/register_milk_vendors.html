@@ -4,8 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>milk vendors Registeration</title>
+    <style>
+        /* General Body Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f9fc; /* Light blue-gray for a calm background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 60%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50; /* Soft green to align with the dairy theme */
+            font-size: 3em;
+        }
+
+        form {
+            background-color: #ffffff; /* Clean white form background */
+            padding: 20px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 30%;
+            width: 100%;
+            height: 70%;
+        }
+
+        /* CSRF Token and Form Elements */
+        form p {
+            margin-bottom: 15px;
+        }
+
+        form label {
+            font-size: 1em;
+            color: #555; /* Subtle dark gray for labels */
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 5px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        /* Submit Button */
+        button[type="submit"] {
+            background-color: #4CAF50; /* Soft green button */
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049; /* Darker green on hover */
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style
 </head>
 <body>
+    <h1>Registeration</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

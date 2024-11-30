@@ -45,25 +45,6 @@ class milk_pricing(models.Model):
     class Meta:
         verbose_name = "Milk Pricing"
         verbose_name_plural = "Milk Pricing"
-
-    
-    
-    
-# class milk_Buyers(models.Model):
-#     name = models.CharField(max_length=50)
-#     username = models.CharField(max_length=50)
-#     password = models.CharField(max_length=4)
-#     companyname = models.CharField(max_length=50)
-#     prn = models.IntegerField()
-#     address = models.CharField(max_length=50)
-    
-#     def __str__(self) :
-#         return f"{self.name}-{self.companyname}-{self.prn}-{self.address}-{self.username}-{self.password}"
-    
-#     class Meta:
-#         verbose_name = "milk_Buyers"
-#         verbose_name_plural = "milk_Buyers"
-        
         
         
 

@@ -1,0 +1,158 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    color: #032804;
+    font-size: 2.5em;
+}
+
+/* Table Styles */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead tr {
+    background-color: #4CAF50;
+    color: white;
+    text-transform: uppercase;
+}
+
+th, td {
+    padding: 12px 20px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* tr:hover {
+    background-color: #f1f7f1;
+} */
+
+/* Button Styles */
+button {
+    padding: 8px 16px;
+    font-size: 1em;
+    color: white;
+    background-color: #4caf4f;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Link Styles */
+a {
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: #183b19;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #2d7a35;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        font-size: 0.9em;
+        padding: 8px 12px;
+    }
+
+    button {
+        padding: 6px 12px;
+        font-size: 0.9em;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+}
+
+form {
+    background-color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+/* Form Labels */
+form label {
+    font-size: 1.1em;
+    color: #4CAF50; /* Subtle green text for dairy theme */
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Form Inputs */
+form input[type="text"],
+form input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Submit Button */
+form input[type="submit"] {
+    background-color: #4CAF50; /* Subtle green for action button */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+        font-size: 0.9em;
+    }
+
+    form input[type="submit"] {
+        font-size: 1em;
+    }
+}

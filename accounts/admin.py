@@ -10,7 +10,7 @@ class MilkBuyerAdmin(admin.ModelAdmin):
         return obj.user.username if obj.user else None  # Safely fetch username if user exists
     get_username.short_description = 'Username' 
     
-admin.site.register(milk_vendors)
+# admin.site.register(milk_vendors)
 admin.site.register(milk_pricing)
 
 class MilkOrderAdmin(admin.ModelAdmin):
@@ -20,10 +20,7 @@ class MilkOrderAdmin(admin.ModelAdmin):
 
 admin.site.register(MilkOrder, MilkOrderAdmin)
     
-
-# class MilkOrderAdmin(admin.ModelAdmin):
-#     list_display = ('buyer', 'quantity', 'request_date')
-#     list_filter = ('request_date',)
-#     search_fields = ('buyer__name', 'buyer__username')
-
-# admin.site.register(MilkOrder, MilkOrderAdmin)
+@admin.register(milk_vendors)
+class MilkVendorsAdmin(admin.ModelAdmin):
+    list_display = ('user', 'phone_no', 'address', 'join_date')
+    search_fields = ('user__username', 'phone_no')

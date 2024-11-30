@@ -2,10 +2,12 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User , auth
 from .models import MilkOrder, milk_pricing, milk_vendors,MilkBuyer
-from .form import FarmerRegistrationForm, MilkOrderForm
+from .form import FarmerRegistrationForm, MilkBuyerForm, MilkOrderForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import login
+from django.contrib.auth import authenticate
+
 
 # Create your views here.
 
@@ -42,39 +44,21 @@ def venderlogin(request):
         return render(request, 'venderlogin.html')
     
 
-# @login_required
-# def user_profile(request):
-#     # Get the logged-in user
-#     current_user = request.user
-
-#     # Fetch milk_vendor details for the user
-#     try:
-#         vendor_details = milk_vendors.objects.get(user=current_user)
-#         vendor = milk_vendors.objects.all()
-#         print(vendor)
-#     except milk_vendors.DoesNotExist:
-#         vendor_details = None
-
-#     context = {
-#         "user" : request.user,
-#         "vendor_details": vendor_details
-#     }
-#     return render(request, 'userDashBoard.html', context)
-
 
 def user_profile(request):
     vendor_details = None
     if request.user.is_authenticated:
         try:
             vendor_details = milk_vendors.objects.get(user=request.user)
-        except vendor_details.DoesNotExist:
+        except milk_vendors.DoesNotExist:
             vendor_details = None
     
     context = {
         'user': request.user,
         'vendor_details': vendor_details
     }
-    return render(request, 'userDashBoard.html', context)
+    return render(request, 'userDashBoard.html', {'user': request.user, 'vendor_details': vendor_details})
+
 
 def adminlogin(request):
     if request.method == 'POST':
@@ -115,50 +99,6 @@ def PriceChart(request):
     pricing_data = milk_pricing.objects.all()
     return render(request, "PriceChart.html", {'pricing_data': pricing_data})
     
-# def register_milk_Purchaser(request):
-#     if request.method == "POST":
-#         name = request.POST.get("name")
-#         cname = request.POST.get("Cname")
-#         prn = request.POST.get("PRN")
-#         address = request.POST.get("Address")
-#         username = request.POST.get("Username")
-#         password = request.POST.get("Password")
-        
-#         if not name or not cname or not prn or not address or not password or not username:
-#             return render(request, "register_milk_Purchaser.html",{
-#                 "error" : "All fields are required!"
-#             })
-#         else:   
-#             try:
-#                 purchaser_instance = milk_Buyers(
-#                 name=name,
-#                 companyname=cname,
-#                 prn=prn,
-#                 address=address,
-#                 username=username,
-#                 password = make_password(password)
-#                 )
-#                 purchaser_instance.save()
-
-#                 # Success response
-#                 return render(request, "Purchaserlogin.html", {
-#                     "success": "Purchaser registered successfully!"
-#                 })
-
-#             except Exception as e:
-#                  return render(request, "register_milk_Purchaser.html", {
-#                     "error": f"An error occurred: {e}"
-#                 })
-#     else:
-#         return render(request, "register_milk_Purchaser.html")
-    
-    
-def register_milk_Purchaser(request):
-    return render(request, "register_milk_Purchaser.html")
-           
-
-from django.contrib.auth import authenticate
-
 
 def Purchaserlogin(request):
     if request.method == 'POST':
@@ -179,7 +119,7 @@ def Purchaserlogin(request):
             user = authenticate(username=user.username, password=password)
             if user is not None:
                 login(request, user)  # Django's login function
-                return redirect('home')  # Redirect to the home page after successful login
+                return redirect('BuyersDashBoard')  # Redirect to the home page after successful login
             else:
                 messages.error(request, 'Invalid username or password')
         except MilkBuyer.DoesNotExist:
@@ -187,45 +127,28 @@ def Purchaserlogin(request):
 
     return render(request, 'Purchaserlogin.html')
 
+
 def register_milk_Purchaser(request):
     if request.method == 'POST':
-        name = request.POST.get('name')
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        companyname = request.POST.get('companyname')
-        prn = request.POST.get('prn')
-        address = request.POST.get('address')
+        user_form = UserRegistrationForm(request.POST)
+        milkbuyer_form = MilkBuyerForm(request.POST)
+        if user_form.is_valid() and milkbuyer_form.is_valid():
+            # Create user
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])
+            user.save()
+            # Create MilkBuyer
+            milk_buyer = milkbuyer_form.save(commit=False)
+            milk_buyer.user = user
+            milk_buyer.username = user.username
+            milk_buyer.save()
+            messages.success(request, "Registration successful!")
+            return redirect('Purchaserlogin')
+    else:
+        user_form = UserRegistrationForm()
+        milkbuyer_form = MilkBuyerForm()
+    return render(request, 'register_milk_Purchaser.html', {'user_form': user_form, 'milkbuyer_form': milkbuyer_form})
 
-        if not all([name, username, password, companyname, prn, address]):
-            messages.error(request, "All fields are required!")
-            return render(request, 'register_milk_Purchaser.html')
-
-        if User.objects.filter(username=username).exists():
-            messages.error(request, "Username already taken!")
-            return render(request, 'register_milk_Purchaser.html')
-
-        if MilkBuyer.objects.filter(prn=prn).exists():
-            messages.error(request, "PRN already exists!")
-            return render(request, 'register_milk_Purchaser.html')
-
-        # Create the User
-        user = User.objects.create_user(username=username, password=password)
-        user.save()
-
-        # Create the MilkBuyer and link it to the User
-        buyer = MilkBuyer(
-            user=user,
-            name=name,
-            companyname=companyname,
-            prn=prn,
-            address=address
-        )
-        buyer.save()
-
-        messages.success(request, "Registration successful! You can now log in.")
-        return redirect('Purchaserlogin')
-
-    return render(request, 'register_milk_Purchaser.html')
 
 def milk_buyer_login(request):
     if request.method == 'POST':
@@ -256,9 +179,9 @@ def place_order(request):
         if form.is_valid():
             try:
                 # Fetch the logged-in user's MilkBuyer profile
-                milk_buyer = request.user.milk_buyer
+                milkbuyer = request.user.milkbuyer
                 order = form.save(commit=False)
-                order.buyer = milk_buyer
+                order.buyer = milkbuyer
                 order.save()
                 messages.success(request, "Order placed successfully!")
                 return redirect('BuyersDashBoard')
