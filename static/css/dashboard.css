@@ -1,0 +1,166 @@
+/* General Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 28px;
+    color: #007bff;
+    margin: 0;
+}
+
+.nav-link {
+    color: #555;
+    font-weight: 500;
+    margin-right: 15px;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+.navbar-toggler {
+    border: none;
+    outline: none;
+}
+
+/* Spinner */
+#spinner {
+    z-index: 9999;
+}
+
+/* Dashboard Heading */
+.text-center h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+    color: #007bff;
+}
+
+/* Card Styles */
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.card h3 {
+    color: #333;
+    font-weight: bold;
+}
+
+.card p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Buttons */
+.btn {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+    border-color: #1e7e34;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+/* Input Forms */
+form input, form textarea, form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #555;
+    background-color: #f9f9f9;
+}
+
+form input:focus, form textarea:focus, form select:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Footer */
+.container-fluid.bg-secondary {
+    background-color: #343a40 !important;
+    color: #ccc;
+}
+
+.container-fluid a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.container-fluid a:hover {
+    color: #0056b3;
+}
+
+/* Back-to-Top Button */
+.back-to-top {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.back-to-top:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-brand h1 {
+        font-size: 22px;
+    }
+    .text-center h1 {
+        font-size: 28px;
+    }
+}

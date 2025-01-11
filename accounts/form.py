@@ -1,18 +1,9 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import MilkBuyer, MilkOrder
+from .models import MilkBuyer, MilkOrder, MilkSeller
 
-class FarmerRegistrationForm(UserCreationForm):
-    
-    phone_no = forms.CharField(max_length=15, required=True)
-    address  = forms.CharField(widget=forms.Textarea, required=True)
-    
-    class Meta:
-        model = User # Specify the User model
-        
-        fields = ['first_name','last_name','username','email','password1','password2','phone_no','address'] # Include desired fields
-    
+
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     confirm_password = forms.CharField(widget=forms.PasswordInput)
@@ -28,6 +19,12 @@ class UserRegistrationForm(forms.ModelForm):
         if password != confirm_password:
             raise forms.ValidationError("Passwords do not match.")
 
+
+class FarmerRegistrationForm(forms.ModelForm):
+     class Meta:
+        model = MilkSeller
+        fields = ['phone_no','address', 'name']
+
 class MilkBuyerForm(forms.ModelForm):
     class Meta:
         model = MilkBuyer
@@ -38,6 +35,6 @@ class MilkOrderForm(forms.ModelForm):
     class Meta:
         model = MilkOrder
         fields = ['quantity']  # Add other fields if required
-        widgets = {
-            'quantity': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter quantity in liters'}),
-        }
+        # widgets = {
+        #     'quantity': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Enter quantity in liters'}),
+        # }

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import MilkOrder, milk_pricing, milk_vendors, MilkBuyer
+from .models import MilkOrder, MilkSeller, milk_pricing, MilkBuyer
 
 @admin.register(MilkBuyer)
 class MilkBuyerAdmin(admin.ModelAdmin):
@@ -20,7 +20,11 @@ class MilkOrderAdmin(admin.ModelAdmin):
 
 admin.site.register(MilkOrder, MilkOrderAdmin)
     
-@admin.register(milk_vendors)
-class MilkVendorsAdmin(admin.ModelAdmin):
-    list_display = ('user', 'phone_no', 'address', 'join_date')
-    search_fields = ('user__username', 'phone_no')
+    
+@admin.register(MilkSeller)
+class MilkSellerAdmin(admin.ModelAdmin):
+    list_display = ('name', 'get_username', 'address', 'phone_no')
+
+    def get_username(self, obj):
+        return obj.user.username if obj.user else None  # Safely fetch username if user exists
+    get_username.short_description = 'Username' 

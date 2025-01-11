@@ -3,32 +3,39 @@
 <html lang="en">
 <head>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'css/forms.css' %}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Admin Login Form</title>
 </head>
-<body class="bg-gray-100 h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded shadow-lg w-full max-w-md">
-        <form action="adminlogin" method="POST" class="space-y-6">
+<body>
+     
+        <form action="adminlogin" method="POST" >
+            <h1 style="font-size: 5vh; font-weight: bold;">Login</h1>
+            <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;  background-color: rgba(26, 24, 24, 0.564); ">
+                <div style="padding-left: -10px;">
+                    <img src="{% static 'img/farmer1.png' %}" alt="Image" >
+                </div>
             {% csrf_token %}
+            
+               
+            <div>
             <!-- Username Field -->
             <div>
-                <label for="username" class="block text-lg font-medium text-gray-700">Enter Username:</label>
+                <label for="username" >Enter Username:</label>
                 <input 
                     type="text" 
                     name="username" 
                     id="username" 
-                    class="mt-1 block w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Username"
                 >
             </div>
             <!-- Password Field -->
             <div>
-                <label for="password" class="block text-lg font-medium text-gray-700">Enter Password:</label>
+                <label for="password">Enter Password:</label>
                 <input 
                     type="password" 
                     name="password" 
                     id="password" 
-                    class="mt-1 block w-full p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Password"
                 >
             </div>
@@ -38,16 +45,28 @@
                     type="submit" 
                     name="submit" 
                     value="Submit" 
-                    class="w-full bg-blue-500 text-white py-2 px-4 rounded cursor-pointer hover:bg-blue-600"
                 >
             </div>
-        </form>
-        <!-- Error Messages -->
-        <div class="mt-4">
+            <div>
+                <a href="" style="font-size: 1.5rem; color: rgba(51, 0, 255, 0.852);">Forget Password</a>
+            </div>
+            <div >
+                <a href="{% url 'index' %}" style="font-size: 1.2rem; color: rgb(0, 0, 0);">BACK</a>
+            </div>
+            </div>
+        </div>
+        <div>
             {% for message in messages %}
-            <p class="text-red-500 text-sm font-semibold">{{ message }}</p>
+            <p style="color: rgba(255, 0, 0, 0.826); font-size:x-large;">{{ message }}</p>
             {% endfor %}
         </div>
-    </div>
+
+    
+        </form>
+        
+    
+        <!-- Error Messages -->
+        
+    
 </body>
 </html>

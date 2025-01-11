@@ -7,14 +7,15 @@
    
     <!-- Template Stylesheet -->
     <link href="{% static 'css/table.css'%}" rel="stylesheet">
+    <!-- <link href="{% static 'css/forms.css'%}" rel="stylesheet"> -->
 
     <title>PriceChart</title>
 </head>
-<body>
+<body style="display: flex; flex-direction:column; justify-content: center; background-image: url('/static/img/health.jpg'); background-repeat: no-repeat; background-size:cover ;">
    <div >
     <h1>Milk Price Chart</h1>
-    <table>
-        <tr>
+    <table style="width: 30vw; justify-content: center; height: 50vh; font-size: larger; ">
+        <tr style=" align-items: center; font-weight: bold;">
             <th >Quality</th>
             <th >Grade</th>
             <th>price_per_liter</th>

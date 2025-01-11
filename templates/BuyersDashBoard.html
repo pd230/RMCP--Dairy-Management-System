@@ -15,7 +15,9 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">   
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@700&family=Open+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -33,80 +35,100 @@
     <link href="{% static 'css/style.css'%}" rel="stylesheet">
 </head>
 
-<body>
+<body style="justify-content: center; align-items: center; padding: 0; margin: 0;">
     <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
     </div>
     <!-- Spinner End -->
 
+    <div style="display: flex;
+    flex-direction: column;
+    min-height: 100vh;">
+        {% csrf_token %}
+        <!-- Navbar Start -->
+        <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5">
+            <a href="index.html" class="navbar-brand d-flex align-items-center">
+                <h1 class="m-0">RMCP</h1>
+            </a>
+            <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
+                    <!-- <a href="service.html" class="nav-item nav-link">Services</a> -->
+                    <!-- <a href="product.html" class="nav-item nav-link">Products</a> -->
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top px-4 px-lg-5">
-        <a href="index.html" class="navbar-brand d-flex align-items-center">
-            <h1 class="m-0">RMCP</h1>
-        </a>
-        <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav ms-auto p-4 p-lg-0">
-                <a href="index.html" class="nav-item nav-link active">Home</a>
-                <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                <!-- <a href="service.html" class="nav-item nav-link">Services</a> -->
-                <!-- <a href="product.html" class="nav-item nav-link">Products</a> -->
-                
-                <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
-                <a href="{% url 'logout' %}" class="nav-item nav-link">logout</button>
-            </div>
-        </div>
-    </nav>
-    <!-- Navbar End -->
-    
-    {% csrf_token %}
-
-
-    <div class="container mt-5">
-    <div class="text-center">
-        <h1 class="text-dark fw-bold">Hello, {{ buyer.name }}</h1>
-        <hr class="my-4">
-   
-
-    <div class="card p-4 shadow-sm">
-        
-            <h3 class="text-primary">Purchaser Details:</h3>
-            <p><strong>username:</strong> {{ buyer.username}}</p>
-            <p><strong>companyname:</strong> {{ buyer.companyname }}</p>
-            <p><strong>prn:</strong> {{ buyer.prn }}</p>
-            <p><strong>address:</strong> {{ buyer.address}}</p>          
-    </div>
-    <div>
-    </div>
-</div>
-
-<div class="text-center mt-4">
-    <a href="{% url 'place_order' %}" class="btn btn-primary">Make Purchase Milk</a>
-</div>
-
-</div>
-
-     
-
-    <!-- Copyright Start -->
-    <div class="container-fluid bg-secondary text-body copyright py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    &copy; <a class="fw-semi-bold" href="#">RMCP</a>, All Right Reserved.
+                    <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+                    <a href="{% url 'logout' %}" class="nav-item nav-link">logout</button>
                 </div>
             </div>
+        </nav>
+        <!-- Navbar End -->
+
+
+
+        <div class="container mt-5"
+            style="display: flex; flex-direction: row; justify-content: center; column-gap: 3vw; flex: auto;">
+            <div class="text-center">
+                <h1 class="text-dark fw-bold">Hello, {{ buyer.name }}</h1>
+                <hr class="my-4">
+
+
+                <div class="card p-4 shadow-sm" style="width: 30vw; background-color:rgb(242, 223, 118)">
+
+                    <h1 class="text-primary">Purchaser Details:</h1>
+                    <p><strong>username:</strong> {{ buyer.username}}</p>
+                    <p><strong>companyname:</strong> {{ buyer.companyname }}</p>
+                    <p><strong>prn:</strong> {{ buyer.prn }}</p>
+                    <p><strong>address:</strong> {{ buyer.address}}</p>
+                </div>
+                <div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                {% block content %}
+                <div class="container mt-5">
+                    <h1 class="text-center">Make Purchase Milk</h1>
+                    <form method="POST" action="{% url 'BuyersDashBoard' %}" class="mt-4">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        
+                        <button type="submit" class="btn btn-success">Place Order</button>
+                        <a href="{% url 'BuyersDashBoard' %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+                {% endblock %}
+            </div>
+
         </div>
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+                class="bi bi-arrow-up"></i></a>
+
+        <!-- Copyright Start -->
+        <footer class="container-fluid bg-secondary text-body copyright py-4"
+            style="padding-bottom: 0; justify-content: end; border-top: 1px solid #000000;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="fw-semi-bold" href="#">RMCP</a>, All Right Reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
     <!-- Copyright End -->
 
 
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
 
 
     <!-- JavaScript Libraries  -->
@@ -125,6 +147,3 @@
 </body>
 
 </html>
-
-
-

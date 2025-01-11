@@ -2,21 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User , auth
 
 # Create your models here.
-# model for vendors
-class milk_vendors(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="milk_vendor")
-    address = models.CharField(max_length=100)
-    phone_no = models.CharField(max_length=10, unique=True)
-    join_date = models.DateField(auto_now_add=True)
-    
-    
-    def __str__(self):
-        return f"{self.user} - {self.address} - {self.phone_no} - {self.join_date}"
-    
-    
 
-
-    
 class milk_pricing(models.Model):
     
     QUALITY_CHOICES = [
@@ -46,7 +32,16 @@ class milk_pricing(models.Model):
         verbose_name = "Milk Pricing"
         verbose_name_plural = "Milk Pricing"
         
-        
+class MilkSeller(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    username = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=100)
+    phone_no = models.CharField(max_length=15)  # For mobile or landline numbers
+    address = models.TextField()
+    join_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name} - {self.phone_no}-{self.address} - {self.join_date}"
 
 class MilkBuyer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)

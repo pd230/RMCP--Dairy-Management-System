@@ -7,7 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>milk_collection_list</title>
     <link href="{% static 'css/table.css'%}" rel="stylesheet">
-
+    <style>
+        body {
+            background-image: url('/static/img/milkman.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
     <h1>Milk Collections Record</h1>
@@ -30,6 +38,5 @@
         {% endfor %}
     </table>
     <a href="{% url 'adminDashboard' %}">Back to Dashboard</a>
-
 </body>
 </html>

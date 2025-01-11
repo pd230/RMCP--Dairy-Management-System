@@ -1,0 +1,133 @@
+
+        /* General body styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url('/static/img/carousel-1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Form container */
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        /* Form title */
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        /* Input fields and labels */
+        form label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        form input, form select, form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            box-sizing: border-box;
+        }
+
+        form textarea {
+            height: 6vh;
+        }
+        form input:focus, form select:focus, form textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+        }
+
+        /* Flex row for side-by-side inputs */
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        /* Error messages */
+        .error {
+            color: red;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        /* Buttons Container */
+        #buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        #buttons button, 
+        #buttons input[type="reset"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 48%;
+        }
+
+        #buttons button {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        #buttons button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+        }
+
+        #buttons input[type="reset"] {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #buttons input[type="reset"]:hover {
+            background-color: #e53935;
+            transform: scale(1.05);
+        }
+
+        /* Forget Password Link */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #007BFF;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.2s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+            text-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
+        }
+    

@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User , auth
-from .models import MilkOrder, milk_pricing, milk_vendors,MilkBuyer
+from .models import MilkOrder, MilkSeller, milk_pricing,MilkBuyer
 from .form import FarmerRegistrationForm, MilkBuyerForm, MilkOrderForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password, check_password
@@ -13,16 +13,25 @@ from django.contrib.auth import authenticate
 
 def register_milk_vendors(request):
     if request.method == 'POST':
-        form = FarmerRegistrationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            phone_no = form.cleaned_data['phone_no']
-            address = form.cleaned_data['address']
-            milk_vendors.objects.create(user=user, phone_no=phone_no, address=address)
+        user_form = UserRegistrationForm(request.POST)
+        vendor_form = FarmerRegistrationForm(request.POST)
+        if vendor_form.is_valid() and user_form.is_valid():
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])
+            user.save()
+            vendor=vendor_form.save(commit=False)
+            vendor.user = user
+            vendor.username = user.username
+            vendor.save()
+            messages.success(request, "Registration Successful!")
             return redirect('venderlogin')  # Redirect to the login page
+        else:
+            print(vendor_form.errors)
+            print(user_form.errors)
     else:
-        form = FarmerRegistrationForm()
-    return render(request, 'register_milk_vendors.html', {'form': form})
+        user_form = UserRegistrationForm()
+        vendor_form = FarmerRegistrationForm()
+    return render(request, 'register_milk_vendors.html', {'user_form': user_form, 'vendor_form': vendor_form})
 
 
 def venderlogin(request):
@@ -49,8 +58,8 @@ def user_profile(request):
     vendor_details = None
     if request.user.is_authenticated:
         try:
-            vendor_details = milk_vendors.objects.get(user=request.user)
-        except milk_vendors.DoesNotExist:
+            vendor_details = MilkSeller.objects.get(user=request.user)
+        except MilkSeller.DoesNotExist:
             vendor_details = None
     
     context = {
@@ -75,7 +84,7 @@ def adminlogin(request):
             else:
                 messages.error(request,"Not aunthenticated Admin")
         else:
-            messages.error(request,"admin not found")
+            messages.error(request,"Admin Not Found!!")
             return redirect("adminlogin")
         
     else:
@@ -91,6 +100,8 @@ def logout(request):
     auth.logout(request)
     return redirect('/')
 
+def index(request):
+    return redirect('/')
 
 def adminDashboard(request):
     return render(request, "adminDashboard.html")
@@ -168,12 +179,13 @@ def milk_buyer_login(request):
 
     return render(request, 'Purchaserlogin.html')
 
+# def BuyersDashBoard(request):
+#             form = MilkOrderForm()  # Initialize the form
+#             return render(request, "BuyersDashBoard.html", {'form': form, 'buyer': request.user.milkbuyer})
+
+
+# @login_required
 def BuyersDashBoard(request):
-    return render(request, "BuyersDashBoard.html")
-
-
-@login_required
-def place_order(request):
     if request.method == 'POST':
         form = MilkOrderForm(request.POST)
         if form.is_valid():
@@ -190,7 +202,10 @@ def place_order(request):
     else:
         form = MilkOrderForm()
 
-    return render(request, 'place_order.html', {'form': form})
+    return render(request, "BuyersDashBoard.html", {'form': form, 'buyer': request.user.milkbuyer})
+
+
+
 
 def admin_buying_requests(request):
     orders = MilkOrder.objects.all().order_by('-request_date')  # Display latest requests first
